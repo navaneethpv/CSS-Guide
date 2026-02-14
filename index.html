@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERN Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-header i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .card-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .card-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .card-link:hover {
+            background: #764ba2;
+            border-color: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .card-link.secondary {
+            background: transparent;
+            color: #667eea;
+            border-color: #667eea;
+        }
+
+        .card-link.secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.8rem;
+        }
+
+        .section ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .section li {
+            padding: 0.8rem 0;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section li:last-child {
+            border-bottom: none;
+        }
+
+        .section li i {
+            color: #667eea;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            border-top: 2px solid rgba(255,255,255,0.2);
+            margin-top: 3rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🚀 MERN Learning Hub</h1>
+            <p>Master Web Development from Basics to Advanced</p>
+            <div class="badge">HTML • CSS • JavaScript • React • Node.js</div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="grid">
+            <!-- CSS Learning Guide -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-paint-brush"></i>
+                    <h2>CSS Learning Guide</h2>
+                    <p>Complete CSS Tutorial</p>
+                </div>
+                <div class="card-body">
+                    <p>Comprehensive guide covering CSS basics, intermediate concepts, advanced techniques, and expert tips. Learn selectors, box model, flexbox, grid, animations, and responsive design.</p>
+                    <div class="card-links">
+                        <a href="CSS_Learning_Guide.html" class="card-link">
+                            <i class="fas fa-book"></i> Open Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practical Examples -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-code"></i>
+                    <h2>Practical Examples</h2>
+                    <p>Real-world Components</p>
+                </div>
+                <div class="card-body">
+                    <p>10 practical CSS + HTML examples including cards, buttons, forms, badges, progress bars, tabs, and alerts. Live demos with copy-paste code for each component.</p>
+                    <div class="card-links">
+                        <a href="Practical_Examples.html" class="card-link">
+                            <i class="fas fa-lightbulb"></i> View Examples
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Path -->
+        <div class="section">
+            <h2>📚 Learning Path</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Basics</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Intermediate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Advanced</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Expert</div>
+                </div>
+            </div>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> <strong>Week 1-2:</strong> CSS Selectors, Box Model, Colors, Fonts</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Week 3-4:</strong> Display, Flexbox, Positioning, Grid</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Week 5-6:</strong> Transitions, Animations, Transforms, Filters</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Week 7-8:</strong> Responsive Design, Media Queries, Advanced Selectors</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Week 9-10:</strong> Projects, Best Practices, Performance Optimization</li>
+            </ul>
+        </div>
+
+        <!-- What You'll Learn -->
+        <div class="section">
+            <h2>🎯 What You'll Learn</h2>
+            <ul>
+                <li><i class="fas fa-star"></i> Master CSS Selectors and Specificity</li>
+                <li><i class="fas fa-star"></i> Box Model and Layout Fundamentals</li>
+                <li><i class="fas fa-star"></i> Flexbox and CSS Grid Layout</li>
+                <li><i class="fas fa-star"></i> Animations and Transitions</li>
+                <li><i class="fas fa-star"></i> Responsive Design and Media Queries</li>
+                <li><i class="fas fa-star"></i> CSS Variables and Custom Properties</li>
+                <li><i class="fas fa-star"></i> Performance Optimization Tips</li>
+                <li><i class="fas fa-star"></i> Modern CSS Best Practices</li>
+                <li><i class="fas fa-star"></i> Real-world Project Patterns</li>
+                <li><i class="fas fa-star"></i> Debugging and Developer Tools</li>
+            </ul>
+        </div>
+
+        <!-- Project Ideas -->
+        <div class="section">
+            <h2>💡 Project Ideas to Try</h2>
+            <ul>
+                <li><i class="fas fa-project-diagram"></i> <strong>Portfolio Website</strong> - Showcase your work with Flexbox and Grid</li>
+                <li><i class="fas fa-project-diagram"></i> <strong>E-commerce Landing Page</strong> - Product cards, filters, responsive layout</li>
+                <li><i class="fas fa-project-diagram"></i> <strong>Dashboard UI</strong> - Charts, stats cards, data visualization</li>
+                <li><i class="fas fa-project-diagram"></i> <strong>Blog Website</strong> - Article cards, commenting section, navigation</li>
+                <li><i class="fas fa-project-diagram"></i> <strong>Mobile App UI</strong> - Bottom navigation, card layouts, animations</li>
+                <li><i class="fas fa-project-diagram"></i> <strong>Restaurant Website</strong> - Menu cards, gallery, reservations form</li>
+            </ul>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="section">
+            <h2>💡 Pro Tips</h2>
+            <ul>
+                <li><i class="fas fa-lightbulb"></i> Use Firefox or Chrome DevTools (F12) to inspect and debug CSS</li>
+                <li><i class="fas fa-lightbulb"></i> Mobile-first approach: Design for mobile, then add styles for larger screens</li>
+                <li><i class="fas fa-lightbulb"></i> Use CSS variables for consistent colors and spacing</li>
+                <li><i class="fas fa-lightbulb"></i> Prefer transform and opacity for animations (GPU accelerated)</li>
+                <li><i class="fas fa-lightbulb"></i> Test on real devices, not just browser DevTools</li>
+                <li><i class="fas fa-lightbulb"></i> Keep CSS organized with comments and logical grouping</li>
+                <li><i class="fas fa-lightbulb"></i> Use semantic HTML for better CSS practices and accessibility</li>
+                <li><i class="fas fa-lightbulb"></i> Learn BEM naming convention for large projects</li>
+            </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="section">
+            <h2>🔗 Additional Resources</h2>
+            <ul>
+                <li><i class="fas fa-external-link-alt"></i> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/" target="_blank" style="color: #667eea; text-decoration: none;">MDN CSS Documentation</a> - Official CSS reference</li>
+                <li><i class="fas fa-external-link-alt"></i> <a href="https://css-tricks.com/" target="_blank" style="color: #667eea; text-decoration: none;">CSS Tricks</a> - Articles and tutorials</li>
+                <li><i class="fas fa-external-link-alt"></i> <a href="https://flexboxfroggy.com/" target="_blank" style="color: #667eea; text-decoration: none;">Flexbox Froggy</a> - Interactive Flexbox game</li>
+                <li><i class="fas fa-external-link-alt"></i> <a href="https://cssgridgarden.com/" target="_blank" style="color: #667eea; text-decoration: none;">Grid Garden</a> - Interactive Grid game</li>
+                <li><i class="fas fa-external-link-alt"></i> <a href="https://caniuse.com/" target="_blank" style="color: #667eea; text-decoration: none;">Can I Use</a> - Browser compatibility checker</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>💪 Keep practicing and building amazing websites!</p>
+            <p>Remember: Consistency is key to mastering CSS. Build projects, don't just watch tutorials.</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">© 2026 MERN Learning Hub | Hosted on GitHub Pages</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation on page load
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.animation = `slideUp 0.6s ease-out ${index * 0.1}s both`;
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

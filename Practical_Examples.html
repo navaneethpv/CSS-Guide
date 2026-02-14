@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS + HTML Practical Examples</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .example-section {
+            background: white;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .example-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .example-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .example-section p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .code-section {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .code-label {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        code {
+            display: block;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #333;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .demo-area {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px dashed #667eea;
+            margin: 1.5rem 0;
+        }
+
+        .demo-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* ============= EXAMPLE 1: Card Component ============= */
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 300px;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .card-button:hover {
+            background: #764ba2;
+        }
+
+        /* ============= EXAMPLE 2: Button Styles ============= */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+
+        .btn-success {
+            background: #51cf66;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #40c057;
+        }
+
+        /* ============= EXAMPLE 3: Form ============= */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        /* ============= EXAMPLE 4: Badge & Pill ============= */
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-success {
+            background: #51cf66;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: white;
+        }
+
+        .badge-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        /* ============= EXAMPLE 5: Stats Card ============= */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ============= EXAMPLE 6: Avatar Group ============= */
+        .avatar-group {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ============= EXAMPLE 7: Progress Bar ============= */
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* ============= EXAMPLE 8: List Items ============= */
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .list-item:hover {
+            background: #f5f5f5;
+        }
+
+        .list-icon {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .list-content {
+            flex: 1;
+        }
+
+        .list-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .list-subtitle {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* ============= EXAMPLE 9: Navigation Tabs ============= */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: #999;
+            transition: all 0.3s ease;
+            position: relative;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ============= EXAMPLE 10: Alert Messages ============= */
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #51cf66;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #0288d1;
+        }
+
+        /* ============= Responsive ============= */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 CSS + HTML Practical Examples</h1>
+
+        <!-- EXAMPLE 1: CARD COMPONENT -->
+        <div class="example-section">
+            <h2>1️⃣ Card Component</h2>
+            <p>A reusable card with image, title, description, and button. Perfect for displaying products, posts, or services.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="card"&gt;
+  &lt;div class="card-image"&gt;🎨&lt;/div&gt;
+  &lt;div class="card-content"&gt;
+    &lt;h3 class="card-title"&gt;Card Title&lt;/h3&gt;
+    &lt;p class="card-description"&gt;Card description goes here&lt;/p&gt;
+    &lt;button class="card-button"&gt;Learn More&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="card">
+                    <div class="card-image">🎨</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Amazing Card</h3>
+                        <p class="card-description">This is a fantastic card component with hover effects and smooth animations.</p>
+                        <button class="card-button">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 2: BUTTONS -->
+        <div class="example-section">
+            <h2>2️⃣ Button Styles</h2>
+            <p>Different button variations: Primary, Secondary, Success, Danger. Use these classes based on button purpose.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;Success&lt;/button&gt;
+&lt;button class="btn btn-danger"&gt;Delete&lt;/button&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="button-group">
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn btn-success">Success</button>
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 3: FORM -->
+        <div class="example-section">
+            <h2>3️⃣ Contact Form</h2>
+            <p>A properly styled form with various input types. Shows focus states and proper spacing.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;form class="form-container"&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label class="form-label"&gt;Full Name&lt;/label&gt;
+    &lt;input type="text" class="form-input" placeholder="Your name"&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label class="form-label"&gt;Email&lt;/label&gt;
+    &lt;input type="email" class="form-input" placeholder="your@email.com"&gt;
+  &lt;/div&gt;
+  &lt;button type="submit" class="btn btn-primary"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <form class="form-container">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-textarea" placeholder="Your message..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 4: BADGES -->
+        <div class="example-section">
+            <h2>4️⃣ Badge Tags</h2>
+            <p>Small inline elements for labels, tags, status indicators. Great for filtering and categorization.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;span class="badge badge-primary"&gt;HTML&lt;/span&gt;
+&lt;span class="badge badge-success"&gt;CSS&lt;/span&gt;
+&lt;span class="badge badge-warning"&gt;JavaScript&lt;/span&gt;
+&lt;span class="badge badge-danger"&gt;Important&lt;/span&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div>
+                    <span class="badge badge-primary">HTML</span>
+                    <span class="badge badge-success">CSS</span>
+                    <span class="badge badge-warning">JavaScript</span>
+                    <span class="badge badge-danger">Important</span>
+                    <span class="badge badge-primary">Responsive</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 5: STATS CARDS -->
+        <div class="example-section">
+            <h2>5️⃣ Statistics Cards</h2>
+            <p>Dashboard-style cards showing key metrics. Uses responsive grid layout.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="stats-grid"&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-number"&gt;1,234&lt;/div&gt;
+    &lt;div class="stat-label"&gt;Total Users&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-number"&gt;567&lt;/div&gt;
+    &lt;div class="stat-label"&gt;Active Now&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1,234</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">567</div>
+                        <div class="stat-label">Active Now</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">89%</div>
+                        <div class="stat-label">Growth Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 6: AVATARS -->
+        <div class="example-section">
+            <h2>6️⃣ Avatar Group</h2>
+            <p>Circular profile pictures, often used in user lists or team sections.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="avatar-group"&gt;
+  &lt;div class="avatar"&gt;JD&lt;/div&gt;
+  &lt;div class="avatar"&gt;AP&lt;/div&gt;
+  &lt;div class="avatar"&gt;MK&lt;/div&gt;
+  &lt;div class="avatar"&gt;+3&lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="avatar-group">
+                    <div class="avatar">JD</div>
+                    <div class="avatar">AP</div>
+                    <div class="avatar">MK</div>
+                    <div class="avatar">+3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 7: PROGRESS BARS -->
+        <div class="example-section">
+            <h2>7️⃣ Progress Bars</h2>
+            <p>Show completion percentage or progress. Perfect for skill levels, file uploads, or project progress.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="progress-container"&gt;
+  &lt;div class="progress-label"&gt;
+    &lt;span&gt;Skills&lt;/span&gt;
+    &lt;span&gt;75%&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="progress-bar"&gt;
+    &lt;div class="progress-fill" style="width: 75%;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>HTML</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>CSS</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>JavaScript</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 70%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 8: LIST ITEMS -->
+        <div class="example-section">
+            <h2>8️⃣ List Items with Icons</h2>
+            <p>Styled list items with icons. Great for features, benefits, or todo lists.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="list-item"&gt;
+  &lt;div class="list-icon"&gt;✓&lt;/div&gt;
+  &lt;div class="list-content"&gt;
+    &lt;div class="list-title"&gt;Fast Performance&lt;/div&gt;
+    &lt;div class="list-subtitle"&gt;Optimized for speed&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div style="max-width: 500px;">
+                    <div class="list-item">
+                        <div class="list-icon">✓</div>
+                        <div class="list-content">
+                            <div class="list-title">Fast Performance</div>
+                            <div class="list-subtitle">Optimized for speed</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon">🔒</div>
+                        <div class="list-content">
+                            <div class="list-title">Secure & Safe</div>
+                            <div class="list-subtitle">Enterprise grade security</div>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon">📱</div>
+                        <div class="list-content">
+                            <div class="list-title">Fully Responsive</div>
+                            <div class="list-subtitle">Works on all devices</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 9: TABS -->
+        <div class="example-section">
+            <h2>9️⃣ Navigation Tabs</h2>
+            <p>Tab navigation for switching between different content sections.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="tabs"&gt;
+  &lt;button class="tab-button active" onclick="showTab(0)"&gt;Overview&lt;/button&gt;
+  &lt;button class="tab-button" onclick="showTab(1)"&gt;Details&lt;/button&gt;
+  &lt;button class="tab-button" onclick="showTab(2)"&gt;Reviews&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="tab-content active"&gt;Overview content&lt;/div&gt;
+&lt;div class="tab-content"&gt;Details content&lt;/div&gt;
+&lt;div class="tab-content"&gt;Reviews content&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab(0, this)">Overview</button>
+                    <button class="tab-button" onclick="showTab(1, this)">Details</button>
+                    <button class="tab-button" onclick="showTab(2, this)">Reviews</button>
+                </div>
+                <div class="tab-content active">
+                    <p>📌 <strong>Overview:</strong> This is the overview tab showing general information about the product.</p>
+                </div>
+                <div class="tab-content">
+                    <p>📋 <strong>Details:</strong> Here are the detailed specifications and technical information.</p>
+                </div>
+                <div class="tab-content">
+                    <p>⭐ <strong>Reviews:</strong> Customer reviews and ratings will be displayed here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAMPLE 10: ALERTS -->
+        <div class="example-section">
+            <h2>🔟 Alert Messages</h2>
+            <p>Status alerts for success, warnings, errors, and information messages.</p>
+
+            <div class="code-section">
+                <div class="code-label">📝 HTML</div>
+                <code>&lt;div class="alert alert-success"&gt;
+  &lt;span class="alert-icon"&gt;✓&lt;/span&gt;
+  &lt;span&gt;Success! Your changes have been saved.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="alert alert-danger"&gt;
+  &lt;span class="alert-icon"&gt;✕&lt;/span&gt;
+  &lt;span&gt;Error! Something went wrong.&lt;/span&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-label">📊 Live Demo</div>
+                <div class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <span>Success! Your changes have been saved.</span>
+                </div>
+                <div class="alert alert-warning">
+                    <span class="alert-icon">⚠</span>
+                    <span>Warning! This action cannot be undone.</span>
+                </div>
+                <div class="alert alert-danger">
+                    <span class="alert-icon">✕</span>
+                    <span>Error! Something went wrong. Please try again.</span>
+                </div>
+                <div class="alert alert-info">
+                    <span class="alert-icon">ℹ</span>
+                    <span>Info: Update available. Please refresh to get the latest version.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KEY CONCEPTS -->
+        <div class="example-section">
+            <h2>🎓 Key CSS Concepts Used</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                <tr style="background: #667eea; color: white;">
+                    <th style="padding: 1rem; text-align: left; border: 1px solid #ddd;">Component</th>
+                    <th style="padding: 1rem; text-align: left; border: 1px solid #ddd;">CSS Concepts</th>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Card</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">box-shadow, transition, transform, overflow</td>
+                </tr>
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Buttons</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">background, hover, scale, box-shadow</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Form</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">:focus, border, box-shadow, width</td>
+                </tr>
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Badges</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">display: inline-block, border-radius</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Stats</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">grid, gradient, text-align</td>
+                </tr>
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Progress Bars</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">width transition, gradient background</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Tabs</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">display: none/block, animation, border-bottom</td>
+                </tr>
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 1rem; border: 1px solid #ddd;">Alerts</td>
+                    <td style="padding: 1rem; border: 1px solid #ddd;">border-left, background, display: flex</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- PRACTICE EXERCISES -->
+        <div class="example-section">
+            <h2>🚀 Practice Exercises</h2>
+            <ol style="margin-left: 2rem;">
+                <li><strong>Modify the card:</strong> Change the background gradient colors</li>
+                <li><strong>Update buttons:</strong> Add a new button style with different colors</li>
+                <li><strong>Form validation:</strong> Add error states with red borders</li>
+                <li><strong>Create a modal:</strong> Use overlay and cards to create a modal dialog</li>
+                <li><strong>Responsive grid:</strong> Make the stats grid 2 columns on tablet, 1 on mobile</li>
+                <li><strong>Custom animations:</strong> Add smooth slide-in animations to cards</li>
+                <li><strong>Navbar:</strong> Combine buttons, list items, and flexbox into a navbar</li>
+                <li><strong>Dark mode:</strong> Add a dark theme using CSS variables</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function showTab(index, element) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach((content, i) => {
+                content.classList.remove('active');
+                if (i === index) {
+                    content.classList.add('active');
+                }
+            });
+            
+            tabButtons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
