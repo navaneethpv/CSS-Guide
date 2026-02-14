@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Learning Guide - Basic to Advanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #764ba2;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+
+        .example-box {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border: 2px dashed #667eea;
+        }
+
+        .note {
+            background: #e8f4f8;
+            padding: 1rem;
+            border-left: 4px solid #0288d1;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .tip {
+            background: #fff3cd;
+            padding: 1rem;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .warning {
+            background: #f8d7da;
+            padding: 1rem;
+            border-left: 4px solid #dc3545;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Interactive Examples */
+        .demo-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid #667eea;
+        }
+
+        .color-demo {
+            width: 100px;
+            height: 100px;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .flex-demo {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .flex-item {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .flex-item:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .grid-item {
+            background: #764ba2;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+
+        .animation-demo {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            border-radius: 50%;
+            margin: 2rem 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes colorChange {
+            0% { background: #667eea; }
+            50% { background: #764ba2; }
+            100% { background: #667eea; }
+        }
+
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        .slide-in {
+            animation: slideIn 1s ease-out;
+        }
+
+        .color-change {
+            animation: colorChange 2s infinite;
+        }
+
+        .responsive-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .responsive-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 CSS Learning Guide: Basic to Advanced</h1>
+
+        <!-- BASIC CSS -->
+        <div class="section slide-in">
+            <h2>🟢 LEVEL 1: BASICS (Foundation)</h2>
+
+            <h3>1.1 CSS Selectors</h3>
+            <div class="code-block">
+<pre><code>/* Element Selector */
+p { color: blue; }
+
+/* Class Selector */
+.box { width: 100px; }
+
+/* ID Selector */
+#header { background: blue; }
+
+/* Attribute Selector */
+input[type="text"] { border: 1px solid blue; }
+
+/* Pseudo Selector */
+a:hover { color: red; }
+
+/* Combinator */
+div > p { color: green; }  /* Direct child */
+div p { color: green; }    /* Any descendant */
+div + p { color: green; }  /* Adjacent sibling */</code></pre>
+            </div>
+
+            <h3>1.2 Box Model</h3>
+            <div class="code-block">
+<pre><code>/* Margin, Border, Padding, Content */
+.box {
+    width: 200px;
+    height: 100px;
+    margin: 20px;         /* Outside space */
+    border: 2px solid;    /* Outline */
+    padding: 15px;        /* Inside space */
+    box-sizing: border-box; /* Include padding/border in width */
+}</code></pre>
+            </div>
+            <div class="demo-box">
+                <p><strong>Box Model Structure (Outside to Inside):</strong></p>
+                <p>Margin → Border → Padding → Content</p>
+                <div style="background: #ddd; padding: 20px; margin: 20px 0; border: 2px solid red; text-align: center;">
+                    <div style="background: #999; padding: 15px; color: white;">
+                        Content Area
+                    </div>
+                </div>
+            </div>
+
+            <h3>1.3 Colors & Backgrounds</h3>
+            <div class="code-block">
+<pre><code>/* Different color formats */
+.color-hex { color: #FF5733; }        /* Hexadecimal */
+.color-rgb { color: rgb(255, 87, 51); }  /* RGB */
+.color-rgba { color: rgba(255, 87, 51, 0.5); }  /* With transparency */
+.color-hsl { color: hsl(10, 100%, 60%); }  /* Hue, Saturation, Lightness */
+
+/* Backgrounds */
+.bg-color { background: #FF5733; }
+.bg-image { background: url('image.jpg') no-repeat center/cover; }
+.bg-gradient { background: linear-gradient(135deg, #667eea, #764ba2); }</code></pre>
+            </div>
+
+            <h3>1.4 Text & Font Properties</h3>
+            <div class="code-block">
+<pre><code>.text {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;        /* 100-900, bold, normal */
+    font-style: italic;       /* italic, normal */
+    line-height: 1.5;         /* Line spacing */
+    letter-spacing: 2px;      /* Character spacing */
+    text-align: center;       /* left, right, center, justify */
+    text-decoration: underline; /* underline, overline, line-through */
+    text-transform: uppercase; /* uppercase, lowercase, capitalize */
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- INTERMEDIATE CSS -->
+        <div class="section slide-in">
+            <h2>🟡 LEVEL 2: INTERMEDIATE (Layout)</h2>
+
+            <h3>2.1 Display Properties</h3>
+            <div class="code-block">
+<pre><code>.display-block { display: block; }        /* Full width, new line */
+.display-inline { display: inline; }        /* Side by side, no width */
+.display-inline-block { display: inline-block; } /* Both properties */
+.display-flex { display: flex; }            /* Flexible layout */
+.display-grid { display: grid; }            /* Grid layout */
+.display-none { display: none; }            /* Hidden, no space taken */
+.display-hidden { visibility: hidden; }     /* Hidden, space taken */</code></pre>
+            </div>
+
+            <h3>2.2 Flexbox (Most Used!)</h3>
+            <div class="code-block">
+<pre><code>.flex-container {
+    display: flex;
+    justify-content: center;      /* Horizontal alignment */
+    align-items: center;          /* Vertical alignment */
+    gap: 1rem;                    /* Space between items */
+    flex-wrap: wrap;              /* Wrap items to next line */
+    flex-direction: row;          /* row, column, row-reverse, column-reverse */
+}
+
+.flex-item {
+    flex: 1;                      /* Equal space */
+    flex-basis: 200px;            /* Base size */
+}</code></pre>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Flexbox Demo:</strong></p>
+                <div class="flex-demo">
+                    <div class="flex-item">Item 1</div>
+                    <div class="flex-item">Item 2</div>
+                    <div class="flex-item">Item 3</div>
+                </div>
+            </div>
+
+            <h3>2.3 CSS Grid</h3>
+            <div class="code-block">
+<pre><code>.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+    grid-template-rows: auto;               /* Auto row height */
+    gap: 1rem;                              /* Space between items */
+    grid-auto-flow: row;                    /* Fill direction */
+}
+
+/* Responsive grid */
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code></pre>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Grid Demo:</strong></p>
+                <div class="grid-demo">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                </div>
+            </div>
+
+            <h3>2.4 Positioning</h3>
+            <div class="code-block">
+<pre><code>.position-static { position: static; }      /* Default, follows flow */
+.position-relative { position: relative; }    /* Relative to normal position */
+.position-absolute { position: absolute; }    /* Relative to parent */
+.position-fixed { position: fixed; }          /* Relative to viewport */
+.position-sticky { position: sticky; }        /* Hybrid relative+fixed */
+
+.positioned {
+    position: absolute;
+    top: 20px;                                /* Distance from top */
+    left: 20px;                               /* Distance from left */
+    z-index: 10;                              /* Stack order */
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- ADVANCED CSS -->
+        <div class="section slide-in">
+            <h2>🔴 LEVEL 3: ADVANCED (Effects & Performance)</h2>
+
+            <h3>3.1 Transitions & Animations</h3>
+            <div class="code-block">
+<pre><code>/* Transitions (Property Change) */
+.button {
+    background: blue;
+    transition: background 0.3s ease;        /* Which property, duration, easing */
+}
+.button:hover {
+    background: red;
+}
+
+/* Animations (Keyframe) */
+@keyframes slide {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(50px); }
+    100% { transform: translateX(100px); }
+}
+
+.animated {
+    animation: slide 2s ease infinite;       /* Name, duration, easing, repeat */
+}</code></pre>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Animation Demos:</strong></p>
+                <p>Bounce Animation:</p>
+                <div class="animation-demo bounce"></div>
+                
+                <p style="margin-top: 2rem;">Color Change Animation:</p>
+                <div class="animation-demo color-change"></div>
+            </div>
+
+            <h3>3.2 Transforms</h3>
+            <div class="code-block">
+<pre><code>.transform {
+    transform: translateX(50px);       /* Move X, Y, Z */
+    transform: rotateZ(45deg);         /* Rotate */
+    transform: scale(1.5);             /* Enlarge/Shrink */
+    transform: skewX(10deg);           /* Skew */
+    
+    /* Combine multiple */
+    transform: translate(50px, 30px) rotate(45deg) scale(1.2);
+    
+    /* 3D transforms */
+    transform: rotateY(60deg);
+    perspective: 1000px;               /* 3D depth */
+}</code></pre>
+            </div>
+
+            <h3>3.3 Shadows & Filters</h3>
+            <div class="code-block">
+<pre><code>/* Text Shadow */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* X, Y, blur, color */
+}
+
+/* Box Shadow */
+.box-shadow {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    /* Inset shadow */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Filters */
+.filter {
+    filter: blur(5px);
+    filter: brightness(1.2);
+    filter: contrast(1.5);
+    filter: grayscale(50%);
+    filter: hue-rotate(90deg);
+    filter: saturate(1.5);
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+}</code></pre>
+            </div>
+
+            <h3>3.4 Responsive Design</h3>
+            <div class="code-block">
+<pre><code>/* Mobile First Approach */
+.container {
+    width: 100%;                       /* 100% on mobile */
+    padding: 1rem;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .container {
+        width: 90%;
+        max-width: 700px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1000px;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+        color: #fff;
+    }
+}</code></pre>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Responsive Grid Demo:</strong></p>
+                <div class="responsive-demo">
+                    <div class="responsive-item">Mobile</div>
+                    <div class="responsive-item">Tablet</div>
+                    <div class="responsive-item">Desktop</div>
+                </div>
+            </div>
+
+            <h3>3.5 Advanced Selectors</h3>
+            <div class="code-block">
+<pre><code>/* Pseudo-classes */
+a:hover { color: red; }                /* Mouse over */
+a:active { color: blue; }              /* Being clicked */
+li:first-child { margin-top: 0; }      /* First element */
+li:last-child { margin-bottom: 0; }    /* Last element */
+li:nth-child(2n) { background: gray; } /* Even items */
+input:focus { border: 2px solid blue; } /* Focused element */
+
+/* Pseudo-elements */
+p::before { content: "→ "; }           /* Before content */
+p::after { content: " ←"; }            /* After content */
+p::first-letter { font-size: 2rem; }   /* First letter */
+p::selection { background: yellow; }   /* Selected text */
+
+/* Attribute selectors */
+input[disabled] { opacity: 0.5; }
+a[href^="https"] { color: green; }     /* Starts with */
+a[href$=".pdf"] { color: red; }        /* Ends with */
+a[href*="example"] { color: blue; }    /* Contains */</code></pre>
+            </div>
+
+            <h3>3.6 CSS Variables (Custom Properties)</h3>
+            <div class="code-block">
+<pre><code>:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --border-radius: 8px;
+    --transition: 0.3s ease;
+}
+
+.button {
+    background: var(--primary-color);
+    border-radius: var(--border-radius);
+    transition: all var(--transition);
+}
+
+.button:hover {
+    background: var(--secondary-color);
+}
+
+/* Change variables in responsive */
+@media (max-width: 768px) {
+    :root {
+        --border-radius: 4px;
+    }
+}</code></pre>
+            </div>
+
+            <h3>3.7 Performance Tips</h3>
+            <table>
+                <tr>
+                    <th>❌ Slow</th>
+                    <th>✅ Fast</th>
+                    <th>Reason</th>
+                </tr>
+                <tr>
+                    <td>width, height change</td>
+                    <td>transform: scale()</td>
+                    <td>No layout recalculation</td>
+                </tr>
+                <tr>
+                    <td>left, top animation</td>
+                    <td>transform: translate()</td>
+                    <td>GPU accelerated</td>
+                </tr>
+                <tr>
+                    <td>box-shadow on click</td>
+                    <td>Use filter: drop-shadow()</td>
+                    <td>Better performance</td>
+                </tr>
+                <tr>
+                    <td>Animate 100 properties</td>
+                    <td>Use transform/opacity</td>
+                    <td>Only 2 properties trigger repaint</td>
+                </tr>
+            </table>
+
+            <div class="tip">
+                <strong>💡 Pro Tip:</strong> Use browser DevTools (F12 → Performance) to check which properties trigger layout/paint/composite.
+            </div>
+        </div>
+
+        <!-- EXPERT TIPS -->
+        <div class="section slide-in">
+            <h2>🟣 LEVEL 4: EXPERT TIPS</h2>
+
+            <h3>4.1 BEM Naming Convention</h3>
+            <div class="code-block">
+<pre><code>/* Block__Element--Modifier */
+.card { }                          /* Block */
+.card__header { }                  /* Element */
+.card__header--active { }          /* Modifier */
+
+/* Good for large projects */
+.button { }
+.button__text { }
+.button--primary { }
+.button--disabled { }</code></pre>
+            </div>
+
+            <h3>4.2 CSS Preprocessors (SCSS/SASS)</h3>
+            <div class="code-block">
+<pre><code>/* Variables */
+$primary-color: #667eea;
+$spacing: 1rem;
+
+/* Nesting */
+.navbar {
+    background: $primary-color;
+    
+    &:hover {
+        background: darken($primary-color, 10%);
+    }
+    
+    .menu {
+        display: flex;
+        gap: $spacing;
+    }
+}
+
+/* Mixins (Reusable code) */
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    @include flex-center;
+}</code></pre>
+            </div>
+
+            <h3>4.3 Optimization Checklist</h3>
+            <div class="demo-box">
+                <ul>
+                    <li>✅ Use semantic HTML with CSS</li>
+                    <li>✅ Minimize CSS file size</li>
+                    <li>✅ Use shorthand properties (margin vs margin-top)</li>
+                    <li>✅ Avoid inline styles</li>
+                    <li>✅ Use CSS grid/flexbox instead of floats</li>
+                    <li>✅ Lazy load images</li>
+                    <li>✅ Minify CSS for production</li>
+                    <li>✅ Use CSS variables for maintainability</li>
+                </ul>
+            </div>
+
+            <h3>4.4 Learning Roadmap</h3>
+            <div class="demo-box">
+                <p><strong>Week 1:</strong> Selectors, Box Model, Colors, Fonts</p>
+                <p><strong>Week 2:</strong> Display, Flexbox, Positioning</p>
+                <p><strong>Week 3:</strong> Grid, Transitions, Transforms</p>
+                <p><strong>Week 4:</strong> Responsive Design, Media Queries</p>
+                <p><strong>Week 5-6:</strong> Advanced Selectors, Animations</p>
+                <p><strong>Week 7-8:</strong> Projects, Best Practices, Preprocessors</p>
+            </div>
+        </div>
+
+        <!-- PRACTICE -->
+        <div class="section slide-in">
+            <h2>🎯 Practice Projects</h2>
+
+            <ol>
+                <li><strong>Portfolio Website</strong> - Use Flexbox, Grid, Responsive Design</li>
+                <li><strong>Card Component</strong> - Shadows, Hover Effects, Transitions</li>
+                <li><strong>Navigation Bar</strong> - (Like your current project!)</li>
+                <li><strong>Landing Page</strong> - Gradients, Animations, Media Queries</li>
+                <li><strong>E-commerce Product Page</strong> - Complex layouts, Filters</li>
+                <li><strong>Dashboard UI</strong> - Grid layout, Custom properties, Responsive</li>
+            </ol>
+
+            <button onclick="alert('Ready to start practicing CSS? Keep coding! 🚀')">Start Learning Now!</button>
+        </div>
+
+        <footer>
+            <p>💪 Keep practicing! Consistency is key to mastering CSS.</p>
+            <p>Remember: Read code → Understand → Practice → Build Projects</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add slide-in animation on scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideIn 0.6s ease-out';
+                }
+            });
+        });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
